@@ -1,0 +1,140 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card {
+    width: 600px;
+    margin: 20px;
+    border: 5px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.banner {
+    width: 600px;
+    height: 200px;
+}
+
+.pro-pic {
+    position: relative;
+    z-index: 1;
+    left: 25px;
+    top: -75px;
+    width: 150px;
+    height: 150px;
+    border: 5px solid white;
+    border-radius: 50%;
+}
+
+.verified {
+    position: relative;
+    top: -35px;
+    left: -35px;
+    width: 10px;
+    z-index: 2;
+}
+
+.follow-button {
+    position: relative;
+    top: -135px;
+    left: 310px;
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+	background-color:#33bdef;
+	border-radius:6px;
+	border:1px solid #057fd0;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #5b6178;
+}
+.follow-button:hover {
+	background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+	background-color:#019ad2;
+}
+
+
+h1 {
+    font-size: 20px;
+    left: 15px;
+}
+
+h2 {
+    font-size: 18px;
+    color: gray;
+    left: 15px;
+}
+
+p {
+    font-size: 15px;
+    left: 15px;
+}
+
+.name {
+    position: relative;
+    top: -75px;
+}
+
+.screen-name {
+    position: relative;
+    top: -90px;
+}
+
+.description {
+    position: relative;
+    top: -75px;
+}
+
+.info-description {
+    position: relative;
+    top: -75px;
+    font-size: 15px;
+    color: gray;
+}
+
+.icon {
+    style: inline;
+    height: 15px;
+    width: 15px;
+    margin-right: 2px;
+    color: gray;
+}
