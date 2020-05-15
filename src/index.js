@@ -23,10 +23,10 @@ function SocialCard() {
             <h2 className="screen-name">@{data.screen_name}</h2>
             <p className="description">{data.description}</p>
             <p className="info-description">
-                <img className="icon" src={require('./images/location-icon.svg')} />{data.location}
-                <img className="icon" src={require('./images/url-icon.png')} />{data.url}
-                <img className="icon" src={require('./images/bday-icon.png')} />Born date
-                <img className="icon" src={require('./images/calendar-icon.png')} />Joined date
+                <img className="icon" src={require('./images/location-icon.svg')} />{data.location} &nbsp;&nbsp;
+                <img className="icon" src={require('./images/url-icon.png')} />{data.url} &nbsp;&nbsp;
+                <img className="icon" src={require('./images/bday-icon.png')} />Born date &nbsp;&nbsp;
+                <img className="icon" src={require('./images/calendar-icon.png')} />Joined date &nbsp;&nbsp;
             </p>
             <p className="info-description">{data.friends_count} Following {data.followers_count} Followers</p>
         </div>
