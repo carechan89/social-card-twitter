@@ -19,9 +19,14 @@ function MyApp() {
         let joined_month = joined_date_object.toLocaleString('default', {month: 'long'});
         let joined_date_string = joined_month + ' ' + joined_year;
 
+        let num_following = NumberFormatter(data.friends_count);
+        let num_followers = NumberFormatter(data.followers_count);
+
         let obj = {
             date: joined_date_string,
-            info: data
+            info: data,
+            following: num_following,
+            followers: num_followers
         };
         arr.push(obj);
     }
@@ -31,6 +36,11 @@ function MyApp() {
 }
 
 function SocialCard({ props }) {
+    let spanStyle = {
+        color: 'black',
+        fontWeight: 'bold'
+    }
+
     return props.map(prop => (
         <div className="card">
             <img src={prop.info.profile_banner_url} className="banner" />
@@ -44,13 +54,22 @@ function SocialCard({ props }) {
             <p className="description">{prop.info.description}</p>
             <p className="info-description">
                 <img className="icon" src={require('./images/location-icon.svg')} />{prop.info.location} &nbsp;&nbsp;
-                <img className="icon" src={require('./images/url-icon.png')} />{prop.info.url} &nbsp;&nbsp;
+                <img className="icon" src={require('./images/url-icon.png')} /><a href={prop.info.url}>{prop.info.url}</a>&nbsp;&nbsp;
                 <img className="icon" src={require('./images/bday-icon.png')} />Born date &nbsp;&nbsp;
                 <img className="icon" src={require('./images/calendar-icon.png')} />Joined {prop.date} &nbsp;&nbsp;
             </p>
-            <p className="info-description">{prop.info.friends_count} Following {prop.info.followers_count} Followers</p>
+            <p className="info-description"><span style={ spanStyle }>{prop.following}</span> Following <span style={ spanStyle }>{prop.followers}</span> Followers</p>
         </div>
     ));
+}
+
+function NumberFormatter(num) {
+    if (num > 999 && num < 1000000) {
+        return (num/1000).toFixed(1) + 'K';
+    } else if (num > 1000000) {
+        return (num/1000000).toFixed(1) + 'M';
+    }
+    return num;
 }
 
 ReactDOM.render(
