@@ -1,56 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
 import ReactDOM from "react-dom";
 import './App.css';
-import axios from 'axios';
 
 
+const myUsernames = ['username-accenture_us.json', 'username-cristiano.json',
+                     'username-rihanna.json', 'username-twitterdev.json'];
 
-function SocialCard() {
-    const [posts, setPosts] = useState([]);
+function MyApp() {
+    let arr = [];
 
-    var data = require('./twitter-info.json');
-    console.log(data);
+    for (let i=0; i < myUsernames.length; ++i) {
+        let path = myUsernames[i];
+        let data = require("./" + path);
 
+        let joined_date = Date.parse(data.created_at);
+        let joined_date_object = new Date(joined_date);
+        let joined_year = joined_date_object.getFullYear();
+        let joined_month = joined_date_object.toLocaleString('default', {month: 'long'});
+        let joined_date_string = joined_month + ' ' + joined_year;
+
+        let obj = {
+            date: joined_date_string,
+            info: data
+        };
+        arr.push(obj);
+    }
     return (
-        <div className="card">
-            <img src={data.profile_background_image_url} className="banner" />
-            <img src={data.profile_image_url} className="pro-pic" />
-            {data.verified &&
-                <img className="verified" src={'https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg'} />
-            }
-            <button className="follow-button">Follow</button>
-            <h1 className="name">{data.name}</h1>
-            <h2 className="screen-name">@{data.screen_name}</h2>
-            <p className="description">{data.description}</p>
-            <p className="info-description">
-                <img className="icon" src={require('./images/location-icon.svg')} />{data.location} &nbsp;&nbsp;
-                <img className="icon" src={require('./images/url-icon.png')} />{data.url} &nbsp;&nbsp;
-                <img className="icon" src={require('./images/bday-icon.png')} />Born date &nbsp;&nbsp;
-                <img className="icon" src={require('./images/calendar-icon.png')} />Joined date &nbsp;&nbsp;
-            </p>
-            <p className="info-description">{data.friends_count} Following {data.followers_count} Followers</p>
-        </div>
-        /*
-        <div className="card">
-            <img src={require("./images/twitter-banner.png")} className="banner" />
-            <img src={require("./images/twitter-logo-profile.png")} className="pro-pic" />
-            <button className="follow-button">Follow</button>
-            <h1 className="name">name here</h1>
-            <h2 className="screen-name">@handle here</h2>
-            <p className="description">description here</p>
-            <p className="info-description">
-                <img className="icon" src={require('./images/location-icon.svg')} />location
-                <img className="icon" src={require('./images/url-icon.png')} />URL
-                <img className="icon" src={require('./images/bday-icon.png')} />Born date
-                <img className="icon" src={require('./images/calendar-icon.png')} />Joined date
-            </p>
-            <p className="info-description">1,807 Following 507.9 K Followers</p>
-        </div>
-        */
+        <SocialCard props={arr} />
     );
 }
 
+function SocialCard({ props }) {
+    return props.map(prop => (
+        <div className="card">
+            <img src={prop.info.profile_banner_url} className="banner" />
+            <img src={prop.info.profile_image_url} className="pro-pic" />
+            {prop.info.verified &&
+                <img className="verified" src={'https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg'} />
+            }
+            <button className="follow-button">Follow</button>
+            <h1 className="name">{prop.info.name}</h1>
+            <h2 className="screen-name">@{prop.info.screen_name}</h2>
+            <p className="description">{prop.info.description}</p>
+            <p className="info-description">
+                <img className="icon" src={require('./images/location-icon.svg')} />{prop.info.location} &nbsp;&nbsp;
+                <img className="icon" src={require('./images/url-icon.png')} />{prop.info.url} &nbsp;&nbsp;
+                <img className="icon" src={require('./images/bday-icon.png')} />Born date &nbsp;&nbsp;
+                <img className="icon" src={require('./images/calendar-icon.png')} />Joined {prop.date} &nbsp;&nbsp;
+            </p>
+            <p className="info-description">{prop.info.friends_count} Following {prop.info.followers_count} Followers</p>
+        </div>
+    ));
+}
+
 ReactDOM.render(
-    <SocialCard />,
-    document.getElementById("root")
+    <MyApp />,
+    document.getElementById('root')
 );
